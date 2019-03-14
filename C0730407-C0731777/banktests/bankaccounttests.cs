@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace banktests
 {
     [TestClass]
+
     public class bankaccounttests
     {
         [TestMethod]
@@ -20,6 +21,30 @@ namespace banktests
             //Assert
             double actual = account.Balance;
             Assert.AreEqual(expected, actual, 0.001, "Account not debited correctly");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Debit_WithAmountIsLessThanZero_ShouldThrowArguementOutOfRange()
+        {
+            //Arrange
+            double beginningBalance = 11.99;
+            double debitAmount = -100.00;
+            BankAccount account = new BankAccount("Mr. bryan walton", beginningBalance);
+            //Act
+            account.Debit(debitAmount);
+
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Debit_WhenAmountIsMoreThanBalanceThanZero_ShouldThrowArguementOutOfRange()
+        {
+            //Arrange
+            double beginningBalance = 11.99;
+            double debitAmount = 100.00;
+            BankAccount account = new BankAccount("Mr. bryan walton", beginningBalance);
+            //Act
+            account.Debit(debitAmount);
+
         }
     }
 }
